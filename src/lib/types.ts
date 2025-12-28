@@ -23,4 +23,5 @@ export interface UserProfile {
   educationLevel?: string;
   state?: string;
   district?: string;
+  profilePictureUrl?: string;
 }

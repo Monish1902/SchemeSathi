@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, User, Settings, LogOut } from 'lucide-react';
+import { LayoutDashboard, User, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useUserProfile } from '@/hooks/use-user-profile';
@@ -71,7 +71,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <Avatar>
-                  <AvatarImage src="https://picsum.photos/seed/user-avatar/40/40" />
+                  <AvatarImage src={profile?.profilePictureUrl} />
                   <AvatarFallback>{getInitials(profile?.fullName)}</AvatarFallback>
                 </Avatar>
                 <span className="sr-only">Toggle user menu</span>
