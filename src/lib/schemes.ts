@@ -95,7 +95,7 @@ export const schemes: Scheme[] = [
   },
   {
     "scheme_id": "scheme_009",
-    "scheme_name": "YSR Nethanna Nestham",
+    "scheme_name": "NTR Nethanna Nestham",
     "scheme_description": "Financial assistance to handloom weavers.",
     "scheme_category": "For Unemployed",
     "department_name": "Handlooms & Textiles Department",
@@ -104,7 +104,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Weaver ID Card", "Bank Account"],
     "application_deadline": null,
     "how_to_apply": "Submit your application at the Handlooms & Textiles department office in your district. You must be a registered weaver to be eligible.",
-    "official_website": "https://example.gov.in/nethanna-nestham"
+    "official_website": "https://handlooms.ap.gov.in/schemes.html"
   },
     {
     "scheme_id": "scheme_010",
