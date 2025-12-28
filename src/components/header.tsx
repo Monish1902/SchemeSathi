@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
+import { ThemeToggleButton } from "./theme-toggle-button";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -28,6 +29,7 @@ const Header = () => {
           ))}
         </nav>
         <div className="flex items-center gap-4">
+          <ThemeToggleButton />
           <Button asChild>
             <Link href="/login">Login / Signup</Link>
           </Button>
