@@ -80,19 +80,6 @@ export const schemes: Scheme[] = [
     "official_website": "https://sspensions.ap.gov.in/SSP"
   },
   {
-    "scheme_id": "scheme_007",
-    "scheme_name": "Jagananna Vidya Deevena",
-    "scheme_description": "Provides full fee reimbursement for students pursuing higher education.",
-    "scheme_category": "For Youth/Students",
-    "department_name": "Department of Higher Education",
-    "total_benefit_amount": 20000,
-    "eligibility_criteria": { "pursuing_higher_education": "Yes", "family_income": "< 2.5 Lakhs" },
-    "required_documents": ["Aadhar Card", "College Admission Letter", "Income Certificate"],
-    "application_deadline": "2024-10-31",
-    "how_to_apply": "Students can apply through the Jnanabhumi portal. The college administration must verify the application.",
-    "official_website": "https://example.gov.in/jagananna-vidya-deevena"
-  },
-  {
     "scheme_id": "scheme_008",
     "scheme_name": "Arogyasri Health Scheme",
     "scheme_description": "Provides cashless treatment for serious ailments in network hospitals.",
