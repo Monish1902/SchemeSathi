@@ -40,7 +40,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} SchemeSevak. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} scheme sathi. All rights reserved.</p>
           <p>A portal for Andhra Pradesh Government Schemes.</p>
         </div>
       </div>

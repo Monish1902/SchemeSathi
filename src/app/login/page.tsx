@@ -70,7 +70,7 @@ export default function LoginPage() {
           <Card>
             <CardHeader>
               <CardTitle>Create an Account</CardTitle>
-              <CardDescription>Join SchemeSevak to find schemes tailored for you.</CardDescription>
+              <CardDescription>Join scheme sathi to find schemes tailored for you.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleAuthAction} className="space-y-4">

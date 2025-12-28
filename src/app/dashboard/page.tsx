@@ -56,7 +56,7 @@ export default function DashboardPage() {
     return (
       <Card className="text-center">
         <CardHeader>
-          <CardTitle>Welcome to SchemeSevak</CardTitle>
+          <CardTitle>Welcome to scheme sathi</CardTitle>
           <CardDescription>
             Please complete your profile to get personalized scheme recommendations.
           </CardDescription>

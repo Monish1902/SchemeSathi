@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'SchemeSevak',
+  title: 'scheme sathi',
   description: 'Discover Government Schemes You\'re Eligible For in Andhra Pradesh',
 };
 
