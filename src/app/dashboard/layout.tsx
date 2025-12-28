@@ -18,11 +18,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/profile", label: "My Profile", icon: User },
-  { href: "#", label: "Settings", icon: Settings },
 ];
 
 
@@ -68,6 +68,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </div>
           </form>
           <ThemeToggleButton />
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="outline" size="icon" onClick={() => router.push('#')}>
+                  <Settings className="h-5 w-5" />
+                  <span className="sr-only">Settings</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Settings</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
