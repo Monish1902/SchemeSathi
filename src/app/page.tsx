@@ -49,7 +49,7 @@ export default function Home() {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative bg-primary/10 py-20 md:py-32">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container-fluid mx-auto px-4 text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4 font-headline">
                 Discover Government Schemes You're Eligible For
               </h1>
@@ -67,7 +67,7 @@ export default function Home() {
 
         {/* Featured Schemes */}
         <section className="py-16 md:py-24 bg-background">
-          <div className="container mx-auto px-4">
+          <div className="container-fluid mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-headline">Featured Schemes</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {featuredSchemes.map((scheme) => (
@@ -79,7 +79,7 @@ export default function Home() {
 
         {/* Scheme Categories */}
         <section className="py-16 md:py-24 bg-secondary/50">
-          <div className="container mx-auto px-4">
+          <div className="container-fluid mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12 font-headline">Scheme Categories</h2>
             <Tabs defaultValue={categories[0].key} className="w-full">
               <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 h-auto">

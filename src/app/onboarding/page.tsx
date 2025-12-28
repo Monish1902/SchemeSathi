@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export default function OnboardingPage() {
   return (
-    <div className="container mx-auto max-w-3xl py-12 px-4">
+    <div className="container-fluid mx-auto max-w-3xl py-12 px-4">
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-3xl font-headline text-center">Tell Us About Yourself</CardTitle>

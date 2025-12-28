@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/logo";
@@ -15,7 +17,7 @@ const navLinks = [
 const Header = () => {
   return (
     <header className="bg-card/80 backdrop-blur-sm border-b sticky top-0 z-50">
-      <div className="container mx-auto px-4 flex justify-between items-center h-16">
+      <div className="container-fluid mx-auto px-4 flex justify-between items-center h-16">
         <Logo />
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
