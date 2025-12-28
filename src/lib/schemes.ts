@@ -64,7 +64,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card of Mother and Child", "School ID Card", "Ration Card"],
     "application_deadline": "2024-11-30",
     "how_to_apply": "The school headmaster will collect the necessary documents and enroll the student in the scheme. The amount is credited directly to the mother's bank account.",
-    "official_website": "https://example.gov.in/amma-vodi"
+    "official_website": "https://egsws.ap.gov.in/reports1.aspx"
   },
   {
     "scheme_id": "scheme_006",
