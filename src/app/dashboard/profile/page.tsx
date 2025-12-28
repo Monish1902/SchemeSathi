@@ -68,9 +68,10 @@ export default function ProfilePage() {
       reader.onloadend = () => {
         const dataUrl = reader.result as string;
         form.setValue("profilePictureUrl", dataUrl);
-        if(profile) {
-            setProfile({ ...profile, profilePictureUrl: dataUrl });
-        }
+        // This ensures the new image is reflected immediately in the layout
+        // by merging it with the rest of the form data before saving.
+        const currentData = form.getValues();
+        setProfile({ ...currentData, profilePictureUrl: dataUrl });
       };
       reader.readAsDataURL(file);
     }
