@@ -108,7 +108,7 @@ export const schemes: Scheme[] = [
   },
     {
     "scheme_id": "scheme_010",
-    "scheme_name": "YSR Vahana Mitra",
+    "scheme_name": "NTR Vahana Mitra",
     "scheme_description": "Financial assistance to self-employed auto, taxi, and maxi cab drivers.",
     "scheme_category": "For Unemployed",
     "department_name": "Transport Department",
@@ -117,6 +117,6 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Driving License", "Vehicle Registration"],
     "application_deadline": null,
     "how_to_apply": "Apply online through the Transport Department portal. Vehicle and license details will be verified electronically.",
-    "official_website": "https://example.gov.in/vahana-mitra"
+    "official_website": "https://schemes.vikaspedia.in/viewcontent/schemesall/state-specific-schemes/welfare-schemes-of-andhra-pradesh/ysr-vahana-mitra?lgn=en"
   }
 ];
