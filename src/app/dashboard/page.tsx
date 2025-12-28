@@ -37,7 +37,7 @@ export default function DashboardPage() {
           if (result.error) {
             setError(result.error);
             setRecommendations([]);
-          } else if (result.data && result.data.length > 0) {
+          } else if (result.data) {
             setRecommendations(result.data.slice(0, 5));
           } else {
             setRecommendations([]);
@@ -84,6 +84,8 @@ export default function DashboardPage() {
     );
   }
 
+  const shouldShowPopular = !loading && (recommendations.length === 0 || !!error);
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold font-headline">
@@ -110,16 +112,8 @@ export default function DashboardPage() {
       </div>
 
       <h2 className="text-2xl font-bold font-headline pt-4">
-        {loading || recommendations.length > 0 ? "Recommended For You" : "Popular Schemes"}
+        {shouldShowPopular ? "Popular Schemes" : "Recommended For You"}
       </h2>
-
-      {error && (
-        <Alert variant="destructive">
-          <Info className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
 
       {loading && (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -127,7 +121,7 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {!loading && recommendations.length > 0 && (
+      {!loading && !shouldShowPopular && recommendations.length > 0 && (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {recommendations.map(scheme => (
             <SchemeCard key={scheme.schemeId} scheme={scheme} />
@@ -135,14 +129,25 @@ export default function DashboardPage() {
         </div>
       )}
       
-      {!loading && recommendations.length === 0 && !error && (
+      {shouldShowPopular && (
          <div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {popularSchemes.map(scheme => (
                 <SimpleSchemeCard key={scheme.schemeId} scheme={scheme} />
               ))}
             </div>
-             <Card className="text-center py-8 mt-6">
+            {!!error && (
+              <Card className="text-center py-8 mt-6">
+                  <CardContent>
+                      <p className="text-sm text-muted-foreground">We couldn't find any schemes that perfectly match your profile right now, but here are some popular ones.</p>
+                      <Button variant="outline" className="mt-4" asChild>
+                          <Link href="/dashboard/profile">Update Profile</Link>
+                      </Button>
+                  </CardContent>
+              </Card>
+            )}
+            {!error && (
+              <Card className="text-center py-8 mt-6">
                 <CardContent>
                     <p className="text-sm text-muted-foreground">We couldn't find any schemes that perfectly match your profile right now. Try updating your profile for better recommendations.</p>
                     <Button variant="outline" className="mt-4" asChild>
@@ -150,6 +155,7 @@ export default function DashboardPage() {
                     </Button>
                 </CardContent>
              </Card>
+            )}
          </div>
       )}
     </div>
