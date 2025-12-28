@@ -10,12 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Logo from "@/components/logo";
 import { useToast } from "@/hooks/use-toast";
-import { useUserProfile } from "@/hooks/use-user-profile";
 
 export default function LoginPage() {
   const router = useRouter();
   const { toast } = useToast();
-  const { setProfile, profile } = useUserProfile();
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -25,11 +23,12 @@ export default function LoginPage() {
 
 
   useEffect(() => {
-    // If a profile exists, the user is already logged in, redirect to dashboard.
-    if (profile) {
+    // If a user profile exists, they are already logged in, so redirect to dashboard.
+    const userProfile = localStorage.getItem('userProfile');
+    if (userProfile) {
       router.push("/dashboard");
     }
-  }, [profile, router]);
+  }, [router]);
 
 
   const handleLogin = (e: React.FormEvent) => {
@@ -40,10 +39,15 @@ export default function LoginPage() {
           const user = JSON.parse(storedUser);
            if (loginEmail === user.email && loginPassword === user.password) {
             
-            // On successful login, we just need to ensure the profile is loaded by the hook
-            // The hook already loads from localstorage, so we just redirect.
             toast({ title: "Login Successful", description: "Welcome back!" });
-            router.push("/dashboard");
+            
+            // Check if profile exists. If so, go to dashboard. Else, onboarding.
+            const userProfile = localStorage.getItem('userProfile');
+            if (userProfile) {
+              router.push("/dashboard");
+            } else {
+              router.push("/onboarding");
+            }
         } else {
             toast({ variant: "destructive", title: "Login Failed", description: "Invalid email or password." });
         }
@@ -63,7 +67,6 @@ export default function LoginPage() {
       localStorage.setItem('userCredentials', JSON.stringify(userCredentials));
       
       // Clear any existing profile on new signup
-      setProfile(null);
       localStorage.removeItem('userProfile');
 
       toast({ title: "Signup Successful", description: "Please complete your profile." });

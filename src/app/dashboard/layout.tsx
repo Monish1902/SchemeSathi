@@ -32,6 +32,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { profile, setProfile } = useUserProfile();
 
   const handleLogout = () => {
+    localStorage.removeItem('userProfile');
+    localStorage.removeItem('userCredentials');
     setProfile(null);
     router.push('/');
   };
