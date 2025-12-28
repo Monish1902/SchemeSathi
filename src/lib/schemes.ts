@@ -12,7 +12,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Bank Account Details", "Income Certificate"],
     "application_deadline": null,
     "how_to_apply": "Applications can be submitted online through the official department website or at the nearest Mee Seva center. Ensure all required documents are scanned and ready for upload.",
-    "official_website": "https://example.gov.in/aadabidda-nidhi"
+    "official_website": "https://aadabiddanidhischeme.com/"
   },
   {
     "scheme_id": "scheme_002",
