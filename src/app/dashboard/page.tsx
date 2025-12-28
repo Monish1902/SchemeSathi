@@ -11,12 +11,22 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FileText, Award, CheckCircle, Info } from "lucide-react";
 import { SchemeCard } from "@/components/dashboard/scheme-card";
+import { schemes } from "@/lib/schemes";
+import { SimpleSchemeCard } from "@/components/dashboard/simple-scheme-card";
 
 export default function DashboardPage() {
   const { profile, loading: profileLoading } = useUserProfile();
   const [recommendations, setRecommendations] = useState<RecommendSchemesBasedOnProfileOutput>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const popularSchemes = schemes.slice(0, 5).map(s => ({
+      schemeId: s.scheme_id,
+      schemeName: s.scheme_name,
+      shortDescription: s.scheme_description,
+      benefitAmount: s.total_benefit_amount,
+      matchPercentage: 0 // Not a match, just popular
+  }));
 
   useEffect(() => {
     if (!profileLoading && profile) {
@@ -26,13 +36,17 @@ export default function DashboardPage() {
         .then(result => {
           if (result.error) {
             setError(result.error);
-          } else if (result.data) {
-            setRecommendations(result.data.slice(0,5));
+            setRecommendations([]);
+          } else if (result.data && result.data.length > 0) {
+            setRecommendations(result.data.slice(0, 5));
+          } else {
+            setRecommendations([]);
           }
         })
         .catch(err => {
           console.error(err);
           setError("An unexpected error occurred.");
+          setRecommendations([]);
         })
         .finally(() => {
           setLoading(false);
@@ -43,9 +57,9 @@ export default function DashboardPage() {
   }, [profile, profileLoading]);
 
   const stats = [
-    { title: "Eligible Schemes", value: recommendations.length, icon: FileText, color: "text-primary" },
-    { title: "Applied Schemes", value: 3, icon: Award, color: "text-accent" },
-    { title: "Approved Schemes", value: 1, icon: CheckCircle, color: "text-green-500" },
+    { title: "Eligible Schemes", value: recommendations.length, icon: FileText, color: "text-primary", link: "/dashboard/my-schemes?status=eligible" },
+    { title: "Applied Schemes", value: 3, icon: Award, color: "text-accent", link: "/dashboard/my-schemes?status=applied" },
+    { title: "Approved Schemes", value: 1, icon: CheckCircle, color: "text-green-500", link: "/dashboard/my-schemes?status=approved" },
   ];
   
   if (profileLoading) {
@@ -78,22 +92,26 @@ export default function DashboardPage() {
 
       <div className="grid gap-4 md:grid-cols-3">
         {stats.map(stat => (
-          <Card key={stat.title}>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-              <stat.icon className={`h-4 w-4 text-muted-foreground ${stat.color}`} />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
-                {loading ? <Skeleton className="h-8 w-12" /> : stat.value}
-              </div>
-              <p className="text-xs text-muted-foreground">Based on your profile</p>
-            </CardContent>
-          </Card>
+          <Link href={stat.link} key={stat.title}>
+            <Card className="hover:bg-muted/80 transition-colors">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <stat.icon className={`h-4 w-4 text-muted-foreground ${stat.color}`} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">
+                  {loading && stat.title === 'Eligible Schemes' ? <Skeleton className="h-8 w-12" /> : stat.value}
+                </div>
+                <p className="text-xs text-muted-foreground">Click to view</p>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
 
-      <h2 className="text-2xl font-bold font-headline pt-4">Recommended For You</h2>
+      <h2 className="text-2xl font-bold font-headline pt-4">
+        {loading || recommendations.length > 0 ? "Recommended For You" : "Popular Schemes"}
+      </h2>
 
       {error && (
         <Alert variant="destructive">
@@ -117,21 +135,23 @@ export default function DashboardPage() {
         </div>
       )}
       
-      {!loading && recommendations.length === 0 && !error &&(
-         <Card className="text-center py-12">
-            <CardHeader>
-                <CardTitle>No Recommendations Yet</CardTitle>
-                <CardDescription>We couldn't find any schemes that perfectly match your profile right now.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p className="text-sm text-muted-foreground">Try updating your profile or check back later for new schemes.</p>
-                <Button variant="outline" className="mt-4" asChild>
-                    <Link href="/dashboard/profile">Update Profile</Link>
-                </Button>
-            </CardContent>
-         </Card>
+      {!loading && recommendations.length === 0 && !error && (
+         <div>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {popularSchemes.map(scheme => (
+                <SimpleSchemeCard key={scheme.schemeId} scheme={scheme} />
+              ))}
+            </div>
+             <Card className="text-center py-8 mt-6">
+                <CardContent>
+                    <p className="text-sm text-muted-foreground">We couldn't find any schemes that perfectly match your profile right now. Try updating your profile for better recommendations.</p>
+                    <Button variant="outline" className="mt-4" asChild>
+                        <Link href="/dashboard/profile">Update Profile</Link>
+                    </Button>
+                </CardContent>
+             </Card>
+         </div>
       )}
-
     </div>
   );
 }
@@ -175,4 +195,4 @@ const SchemeCardSkeleton = () => (
       </div>
     </CardContent>
   </Card>
-)
+);
