@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useUserProfile } from "@/hooks/use-user-profile";
 import { UserProfile } from "@/lib/types";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
-import { Pencil } from "lucide-react";
+import { Pencil, UserRound } from "lucide-react";
 
 
 const formSchema = z.object({
@@ -36,6 +36,7 @@ const formSchema = z.object({
 export default function ProfilePage() {
   const { profile, setProfile, loading } = useUserProfile();
   const { toast } = useToast();
+  const [isEditing, setIsEditing] = React.useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   const form = useForm<UserProfile>({
@@ -51,6 +52,7 @@ export default function ProfilePage() {
 
   const onSubmit: SubmitHandler<UserProfile> = (data) => {
     setProfile(data);
+    setIsEditing(false);
     toast({ title: "Profile Updated", description: "Your details have been saved successfully." });
   };
   
@@ -66,7 +68,6 @@ export default function ProfilePage() {
       reader.onloadend = () => {
         const dataUrl = reader.result as string;
         form.setValue("profilePictureUrl", dataUrl);
-        // We can also optimistically update the profile here if needed
         if(profile) {
             setProfile({ ...profile, profilePictureUrl: dataUrl });
         }
@@ -74,6 +75,13 @@ export default function ProfilePage() {
       reader.readAsDataURL(file);
     }
   };
+
+  const ProfileDetail = ({ label, value }: { label: string; value: React.ReactNode }) => (
+    <div className="space-y-1">
+      <p className="text-sm font-medium text-muted-foreground">{label}</p>
+      <p className="text-base">{value || "-"}</p>
+    </div>
+  );
 
   if (loading) {
     return <ProfileSkeleton />;
@@ -86,28 +94,39 @@ export default function ProfilePage() {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-4">
-                 <Avatar className="h-24 w-24">
-                  <AvatarImage src={profile?.profilePictureUrl} />
-                  <AvatarFallback className="text-3xl">{getInitials(profile?.fullName)}</AvatarFallback>
-                </Avatar>
+                 <div className="relative">
+                    <Avatar className="h-24 w-24">
+                      <AvatarImage src={profile?.profilePictureUrl} />
+                      <AvatarFallback className="text-3xl">{getInitials(profile?.fullName)}</AvatarFallback>
+                    </Avatar>
+                    {isEditing && (
+                      <>
+                        <Button type="button" variant="outline" size="icon" className="absolute bottom-0 right-0 rounded-full" onClick={() => fileInputRef.current?.click()}>
+                          <Pencil className="h-4 w-4" />
+                          <span className="sr-only">Edit Profile Picture</span>
+                        </Button>
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          onChange={handlePictureUpload}
+                          className="hidden"
+                          accept="image/*"
+                        />
+                      </>
+                    )}
+                 </div>
                 <div>
                   <CardTitle className="text-2xl font-headline">{profile?.fullName || 'Your Profile'}</CardTitle>
                   <CardDescription>
-                    Update your personal details and preferences below.
+                    {isEditing ? "Update your personal details below." : "View your personal details."}
                   </CardDescription>
                 </div>
               </div>
-              <Button type="button" variant="outline" size="icon" onClick={() => fileInputRef.current?.click()}>
-                <Pencil className="h-4 w-4" />
-                <span className="sr-only">Edit Profile Picture</span>
-              </Button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handlePictureUpload}
-                className="hidden"
-                accept="image/*"
-              />
+              {!isEditing && (
+                <Button type="button" onClick={() => setIsEditing(true)}>
+                  <Pencil className="mr-2 h-4 w-4" /> Edit Profile
+                </Button>
+              )}
             </div>
           </CardHeader>
         </Card>
@@ -118,27 +137,39 @@ export default function ProfilePage() {
                 <CardDescription>This information helps us personalize your experience.</CardDescription>
             </CardHeader>
             <CardContent className="grid md:grid-cols-2 gap-6">
-              <FormField name="fullName" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Full Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="dob" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Date of Birth</FormLabel><FormControl><Input type="date" {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="gender" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Gender</FormLabel><FormControl>
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4 pt-2">
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Male" /></FormControl><FormLabel className="font-normal">Male</FormLabel></FormItem>
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Female" /></FormControl><FormLabel className="font-normal">Female</FormLabel></FormItem>
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Other" /></FormControl><FormLabel className="font-normal">Other</FormLabel></FormItem>
-                  </RadioGroup>
-                </FormControl><FormMessage /></FormItem>
-              )} />
-               <FormField name="state" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>State</FormLabel><FormControl><Input {...field} disabled /></FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="district" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>District</FormLabel><FormControl><Input placeholder="e.g., Guntur" {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
+              {isEditing ? (
+                <>
+                  <FormField name="fullName" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Full Name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="dob" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Date of Birth</FormLabel><FormControl><Input type="date" {...field} /></FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="gender" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Gender</FormLabel><FormControl>
+                      <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4 pt-2">
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Male" /></FormControl><FormLabel className="font-normal">Male</FormLabel></FormItem>
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Female" /></FormControl><FormLabel className="font-normal">Female</FormLabel></FormItem>
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Other" /></FormControl><FormLabel className="font-normal">Other</FormLabel></FormItem>
+                      </RadioGroup>
+                    </FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="state" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>State</FormLabel><FormControl><Input {...field} disabled /></FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="district" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>District</FormLabel><FormControl><Input placeholder="e.g., Guntur" {...field} /></FormControl><FormMessage /></FormItem>
+                  )} />
+                </>
+              ) : (
+                <>
+                  <ProfileDetail label="Full Name" value={profile?.fullName} />
+                  <ProfileDetail label="Date of Birth" value={profile?.dob ? new Date(profile.dob).toLocaleDateString() : '-'} />
+                  <ProfileDetail label="Gender" value={profile?.gender} />
+                  <ProfileDetail label="State" value={profile?.state} />
+                  <ProfileDetail label="District" value={profile?.district} />
+                </>
+              )}
             </CardContent>
         </Card>
 
@@ -148,43 +179,58 @@ export default function ProfilePage() {
                 <CardDescription>Details related to your economic and social background.</CardDescription>
             </CardHeader>
             <CardContent className="grid md:grid-cols-2 gap-6">
-              <FormField name="casteCategory" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Caste Category</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
-                  <SelectContent><SelectItem value="SC">SC</SelectItem><SelectItem value="ST">ST</SelectItem><SelectItem value="OBC">OBC</SelectItem><SelectItem value="General">General</SelectItem><SelectItem value="Minority">Minority</SelectItem></SelectContent>
-                </Select><FormMessage /></FormItem>
-              )} />
-              <FormField name="annualIncome" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Annual Family Income (INR)</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="occupation" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Occupation Status</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
-                  <SelectContent><SelectItem value="Student">Student</SelectItem><SelectItem value="Employed">Employed</SelectItem><SelectItem value="Self-employed">Self-employed</SelectItem><SelectItem value="Unemployed">Unemployed</SelectItem></SelectContent>
-                </Select><FormMessage /></FormItem>
-              )} />
-              <FormField name="isFarmer" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Are you a farmer?</FormLabel><FormControl>
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4 pt-2">
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Yes" /></FormControl><FormLabel className="font-normal">Yes</FormLabel></FormItem>
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="No" /></FormControl><FormLabel className="font-normal">No</FormLabel></FormItem>
-                  </RadioGroup>
-                </FormControl><FormMessage /></FormItem>
-              )} />
-              <FormField name="hasDisability" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>Do you have any disability?</FormLabel><FormControl>
-                  <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex gap-4 pt-2">
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Yes" /></FormControl><FormLabel className="font-normal">Yes</FormLabel></FormItem>
-                    <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="No" /></FormControl><FormLabel className="font-normal">No</FormLabel></FormItem>
-                  </RadioGroup>
-                </FormControl><FormMessage /></FormItem>
-              )} />
+              {isEditing ? (
+                <>
+                  <FormField name="casteCategory" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Caste Category</FormLabel><Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                      <SelectContent><SelectItem value="SC">SC</SelectItem><SelectItem value="ST">ST</SelectItem><SelectItem value="OBC">OBC</SelectItem><SelectItem value="General">General</SelectItem><SelectItem value="Minority">Minority</SelectItem></SelectContent>
+                    </Select><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="annualIncome" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Annual Family Income (INR)</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="occupation" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Occupation Status</FormLabel><Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl>
+                      <SelectContent><SelectItem value="Student">Student</SelectItem><SelectItem value="Employed">Employed</SelectItem><SelectItem value="Self-employed">Self-employed</SelectItem><SelectItem value="Unemployed">Unemployed</SelectItem></SelectContent>
+                    </Select><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="isFarmer" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Are you a farmer?</FormLabel><FormControl>
+                      <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4 pt-2">
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Yes" /></FormControl><FormLabel className="font-normal">Yes</FormLabel></FormItem>
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="No" /></FormControl><FormLabel className="font-normal">No</FormLabel></FormItem>
+                      </RadioGroup>
+                    </FormControl><FormMessage /></FormItem>
+                  )} />
+                  <FormField name="hasDisability" control={form.control} render={({ field }) => (
+                    <FormItem><FormLabel>Do you have any disability?</FormLabel><FormControl>
+                      <RadioGroup onValueChange={field.onChange} value={field.value} className="flex gap-4 pt-2">
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="Yes" /></FormControl><FormLabel className="font-normal">Yes</FormLabel></FormItem>
+                        <FormItem className="flex items-center space-x-2"><FormControl><RadioGroupItem value="No" /></FormControl><FormLabel className="font-normal">No</FormLabel></FormItem>
+                      </RadioGroup>
+                    </FormControl><FormMessage /></FormItem>
+                  )} />
+                </>
+              ) : (
+                <>
+                  <ProfileDetail label="Caste Category" value={profile?.casteCategory} />
+                  <ProfileDetail label="Annual Family Income" value={profile?.annualIncome ? `₹${profile.annualIncome.toLocaleString()}` : '-'} />
+                  <ProfileDetail label="Occupation Status" value={profile?.occupation} />
+                  <ProfileDetail label="Are you a farmer?" value={profile?.isFarmer} />
+                  <ProfileDetail label="Disability" value={profile?.hasDisability} />
+                </>
+              )}
             </CardContent>
         </Card>
 
-        <div className="flex justify-end">
-            <Button type="submit">Save Changes</Button>
-        </div>
+        {isEditing && (
+          <div className="flex justify-end gap-4">
+              <Button type="button" variant="outline" onClick={() => { setIsEditing(false); form.reset(profile || {}); }}>Cancel</Button>
+              <Button type="submit">Save Changes</Button>
+          </div>
+        )}
       </form>
     </Form>
   );
@@ -195,12 +241,15 @@ const ProfileSkeleton = () => (
     <div className="space-y-6">
         <Card>
             <CardHeader>
-                <div className="flex items-center gap-4">
-                    <Skeleton className="h-24 w-24 rounded-full" />
-                    <div className="space-y-2">
-                        <Skeleton className="h-8 w-48" />
-                        <Skeleton className="h-4 w-64" />
+                <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-4">
+                        <Skeleton className="h-24 w-24 rounded-full" />
+                        <div className="space-y-2">
+                            <Skeleton className="h-8 w-48" />
+                            <Skeleton className="h-4 w-64" />
+                        </div>
                     </div>
+                    <Skeleton className="h-10 w-32" />
                 </div>
             </CardHeader>
         </Card>
@@ -210,10 +259,10 @@ const ProfileSkeleton = () => (
                 <Skeleton className="h-4 w-2/3" />
             </CardHeader>
             <CardContent className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-10 w-full" /></div>
-                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-10 w-full" /></div>
-                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-10 w-full" /></div>
-                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-10 w-full" /></div>
+                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-6 w-full" /></div>
+                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-6 w-full" /></div>
+                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-6 w-full" /></div>
+                <div className="space-y-2"><Skeleton className="h-4 w-24" /><Skeleton className="h-6 w-full" /></div>
             </CardContent>
         </Card>
          <div className="flex justify-end">
@@ -221,3 +270,5 @@ const ProfileSkeleton = () => (
         </div>
     </div>
 );
+
+    
