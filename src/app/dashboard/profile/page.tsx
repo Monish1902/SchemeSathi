@@ -41,7 +41,21 @@ export default function ProfilePage() {
 
   const form = useForm<UserProfile>({
     resolver: zodResolver(formSchema),
-    values: profile || {},
+    // Use default values to prevent uncontrolled to controlled input error
+    defaultValues: {
+      fullName: '',
+      dob: '',
+      gender: 'Male',
+      casteCategory: 'General',
+      annualIncome: 0,
+      isFarmer: 'No',
+      occupation: 'Unemployed',
+      hasDisability: 'No',
+      state: 'Andhra Pradesh',
+      district: '',
+      profilePictureUrl: '',
+    },
+    values: profile || undefined,
   });
 
   React.useEffect(() => {
@@ -271,5 +285,7 @@ const ProfileSkeleton = () => (
         </div>
     </div>
 );
+
+    
 
     
