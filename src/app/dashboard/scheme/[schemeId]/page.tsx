@@ -123,7 +123,7 @@ export default function SchemeDetailPage() {
               <p className="text-muted-foreground">{scheme.how_to_apply}</p>
               <Button asChild>
                   <a href={scheme.official_website} target="_blank" rel="noopener noreferrer">
-                      Visit Official Website <ExternalLink className="ml-2 h-4 w-4" />
+                      Apply Now <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
               </Button>
           </CardContent>
