@@ -20,7 +20,7 @@ const Header = () => {
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={`${link.href}-${link.label}`}
               href={link.href}
               className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors"
             >
@@ -46,7 +46,7 @@ const Header = () => {
                   <Logo />
                   {navLinks.map((link) => (
                     <Link
-                      key={link.href}
+                      key={`${link.href}-${link.label}-mobile`}
                       href={link.href}
                       className="text-lg font-medium text-foreground hover:text-primary transition-colors"
                     >
