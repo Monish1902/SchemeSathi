@@ -1,3 +1,4 @@
+
 "use client"
 
 import Link from "next/link";
@@ -6,15 +7,19 @@ import Logo from "@/components/logo";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu } from "lucide-react";
 import { ThemeToggleButton } from "./theme-toggle-button";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/dashboard", label: "Schemes" },
-  { href: "#", label: "About" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 
 const Header = () => {
+  const pathname = usePathname();
+  const isAboutPage = pathname === '/about';
+
   return (
     <header className="bg-card/80 backdrop-blur-sm border-b sticky top-0 z-50">
       <div className="container-fluid mx-auto px-4 flex justify-between items-center h-16">
@@ -32,9 +37,11 @@ const Header = () => {
         </nav>
         <div className="flex items-center gap-4">
           <ThemeToggleButton />
-          <Button asChild>
-            <Link href="/login">Login / Signup</Link>
-          </Button>
+          {!isAboutPage && (
+            <Button asChild>
+              <Link href="/login">Login / Signup</Link>
+            </Button>
+          )}
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
