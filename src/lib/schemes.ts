@@ -1,0 +1,125 @@
+import { type Scheme } from './types';
+
+export const schemes: Scheme[] = [
+  {
+    "scheme_id": "scheme_001",
+    "scheme_name": "Aadabidda Nidhi Scheme",
+    "scheme_description": "Financial assistance for women to promote self-reliance and empowerment.",
+    "scheme_category": "For Women",
+    "department_name": "Department of Women Development and Child Welfare",
+    "total_benefit_amount": 15000,
+    "eligibility_criteria": { "age": "18-60", "gender": "Female" },
+    "required_documents": ["Aadhar Card", "Bank Account Details", "Income Certificate"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_002",
+    "scheme_name": "Annadata Sukhibhava Scheme",
+    "scheme_description": "Provides financial support to farmers for agricultural inputs.",
+    "scheme_category": "For Farmers",
+    "department_name": "Department of Agriculture",
+    "total_benefit_amount": 10000,
+    "eligibility_criteria": { "occupation": "Farmer", "land_ownership": "Yes" },
+    "required_documents": ["Aadhar Card", "Land Ownership Documents", "Bank Account Details"],
+    "application_deadline": "2024-12-31"
+  },
+  {
+    "scheme_id": "scheme_003",
+    "scheme_name": "Nirudyoga Bruthi",
+    "scheme_description": "A monthly allowance for unemployed youth to support their job search.",
+    "scheme_category": "For Unemployed",
+    "department_name": "Department of Youth Services",
+    "total_benefit_amount": 3000,
+    "eligibility_criteria": { "age": "22-35", "employment_status": "Unemployed", "education": "Graduate" },
+    "required_documents": ["Aadhar Card", "Educational Certificates", "Employment Exchange Card"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_004",
+    "scheme_name": "YSR Rythu Bharosa",
+    "scheme_description": "Financial assistance to farmers, including tenant farmers, for crop investment.",
+    "scheme_category": "For Farmers",
+    "department_name": "Department of Agriculture & Cooperation",
+    "total_benefit_amount": 13500,
+    "eligibility_criteria": { "occupation": "Farmer" },
+    "required_documents": ["Aadhar Card", "Land Documents", "Bank Passbook"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_005",
+    "scheme_name": "Amma Vodi Scheme",
+    "scheme_description": "Financial assistance to mothers for sending their children to private schools.",
+    "scheme_category": "Education Schemes",
+    "department_name": "Department of School Education",
+    "total_benefit_amount": 15000,
+    "eligibility_criteria": { "has_children_in_school": "Yes", "income_below": "poverty line" },
+    "required_documents": ["Aadhar Card of Mother and Child", "School ID Card", "Ration Card"],
+    "application_deadline": "2024-11-30"
+  },
+  {
+    "scheme_id": "scheme_006",
+    "scheme_name": "YSR Pension Kanuka",
+    "scheme_description": "Enhanced pension amounts for various categories like old age, widows, and disabled persons.",
+    "scheme_category": "For Senior Citizens",
+    "department_name": "Department of Rural Development",
+    "total_benefit_amount": 2750,
+    "eligibility_criteria": { "age": ">60", "category": ["Old Age", "Widow", "Disabled"] },
+    "required_documents": ["Aadhar Card", "Bank Account Details", "Proof of Age/Disability"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_007",
+    "scheme_name": "Jagananna Vidya Deevena",
+    "scheme_description": "Provides full fee reimbursement for students pursuing higher education.",
+    "scheme_category": "For Youth/Students",
+    "department_name": "Department of Higher Education",
+    "total_benefit_amount": 20000,
+    "eligibility_criteria": { "pursuing_higher_education": "Yes", "family_income": "< 2.5 Lakhs" },
+    "required_documents": ["Aadhar Card", "College Admission Letter", "Income Certificate"],
+    "application_deadline": "2024-10-31"
+  },
+  {
+    "scheme_id": "scheme_008",
+    "scheme_name": "Arogyasri Health Scheme",
+    "scheme_description": "Provides cashless treatment for serious ailments in network hospitals.",
+    "scheme_category": "Healthcare Schemes",
+    "department_name": "Dr. YSR Aarogyasri Health Care Trust",
+    "total_benefit_amount": 500000,
+    "eligibility_criteria": { "income_below": "poverty line" },
+    "required_documents": ["Aarogyasri Card", "Aadhar Card", "Ration Card"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_009",
+    "scheme_name": "YSR Nethanna Nestham",
+    "scheme_description": "Financial assistance to handloom weavers.",
+    "scheme_category": "For Unemployed",
+    "department_name": "Handlooms & Textiles Department",
+    "total_benefit_amount": 24000,
+    "eligibility_criteria": { "occupation": "Weaver" },
+    "required_documents": ["Aadhar Card", "Weaver ID Card", "Bank Account"],
+    "application_deadline": null
+  },
+    {
+    "scheme_id": "scheme_010",
+    "scheme_name": "YSR Vahana Mitra",
+    "scheme_description": "Financial assistance to self-employed auto, taxi, and maxi cab drivers.",
+    "scheme_category": "For Unemployed",
+    "department_name": "Transport Department",
+    "total_benefit_amount": 10000,
+    "eligibility_criteria": { "occupation": "Driver" },
+    "required_documents": ["Aadhar Card", "Driving License", "Vehicle Registration"],
+    "application_deadline": null
+  },
+  {
+    "scheme_id": "scheme_011",
+    "scheme_name": "YSR Cheyutha",
+    "scheme_description": "Financial assistance to women from SC, ST, BC, Minority communities.",
+    "scheme_category": "For Women",
+    "department_name": "Department of Women Development",
+    "total_benefit_amount": 18750,
+    "eligibility_criteria": { "age": "45-60", "category": ["SC", "ST", "BC", "Minority"] },
+    "required_documents": ["Aadhar Card", "Caste Certificate", "Bank Account"],
+    "application_deadline": null
+  }
+];
