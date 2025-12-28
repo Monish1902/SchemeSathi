@@ -1,3 +1,4 @@
+
 import { type Scheme } from './types';
 
 export const schemes: Scheme[] = [
@@ -117,18 +118,5 @@ export const schemes: Scheme[] = [
     "application_deadline": null,
     "how_to_apply": "Apply online through the Transport Department portal. Vehicle and license details will be verified electronically.",
     "official_website": "https://example.gov.in/vahana-mitra"
-  },
-  {
-    "scheme_id": "scheme_011",
-    "scheme_name": "YSR Cheyutha",
-    "scheme_description": "Financial assistance to women from SC, ST, BC, Minority communities.",
-    "scheme_category": "For Women",
-    "department_name": "Department of Women Development",
-    "total_benefit_amount": 18750,
-    "eligibility_criteria": { "age": "45-60", "category": ["SC", "ST", "BC", "Minority"] },
-    "required_documents": ["Aadhar Card", "Caste Certificate", "Bank Account"],
-    "application_deadline": null,
-    "how_to_apply": "Applications are accepted at the village/ward secretariats. The amount will be credited to the beneficiary's bank account in installments.",
-    "official_website": "https://example.gov.in/ysr-cheyutha"
   }
 ];
