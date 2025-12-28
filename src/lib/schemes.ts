@@ -51,7 +51,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Land Documents", "Bank Passbook"],
     "application_deadline": null,
     "how_to_apply": "Visit your village secretariat with the required documents. The village volunteer will assist you with the application process.",
-    "official_website": "https://example.gov.in/ysr-rythu-bharosa"
+    "official_website": "https://rythubharosa.telangana.gov.in/Login.aspx"
   },
   {
     "scheme_id": "scheme_005",
