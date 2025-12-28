@@ -68,7 +68,7 @@ export const schemes: Scheme[] = [
   },
   {
     "scheme_id": "scheme_006",
-    "scheme_name": "YSR Pension Kanuka",
+    "scheme_name": "NTR Pension Kanuka",
     "scheme_description": "Enhanced pension amounts for various categories like old age, widows, and disabled persons.",
     "scheme_category": "For Senior Citizens",
     "department_name": "Department of Rural Development",
@@ -77,7 +77,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Bank Account Details", "Proof of Age/Disability"],
     "application_deadline": null,
     "how_to_apply": "Applications are processed at the village/ward secretariats. A field verification will be conducted before sanctioning the pension.",
-    "official_website": "https://example.gov.in/ysr-pension-kanuka"
+    "official_website": "https://sspensions.ap.gov.in/SSP"
   },
   {
     "scheme_id": "scheme_007",
