@@ -38,7 +38,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Educational Certificates", "Employment Exchange Card"],
     "application_deadline": null,
     "how_to_apply": "Enroll at your district's Employment Exchange office. You must renew your registration periodically to continue receiving the allowance.",
-    "official_website": "https://example.gov.in/nirudyoga-bruthi"
+    "official_website": "https://www.govtschemes.in/ap-nirudyoga-bruthi-scheme"
   },
   {
     "scheme_id": "scheme_004",
