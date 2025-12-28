@@ -10,7 +10,7 @@ import { ThemeToggleButton } from "./theme-toggle-button";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { href: "/dashboard", label: "Schemes" },
+  { href: "/dashboard/schemes", label: "Schemes" },
   { href: "/dashboard", label: "Dashboard" },
 ];
 
