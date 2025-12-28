@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -8,13 +9,45 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Logo from "@/components/logo";
+import { useToast } from "@/hooks/use-toast";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { toast } = useToast();
 
-  const handleAuthAction = (e: React.FormEvent) => {
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+
+
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/onboarding");
+    try {
+      const storedEmail = localStorage.getItem('userEmail');
+      const storedPassword = localStorage.getItem('userPassword');
+
+      if (loginEmail === storedEmail && loginPassword === storedPassword) {
+        toast({ title: "Login Successful", description: "Welcome back!" });
+        router.push("/dashboard");
+      } else {
+        toast({ variant: "destructive", title: "Login Failed", description: "Invalid email or password." });
+      }
+    } catch (error) {
+        toast({ variant: "destructive", title: "Error", description: "Could not process login." });
+    }
+  };
+  
+  const handleSignUp = (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      localStorage.setItem('userEmail', signupEmail);
+      localStorage.setItem('userPassword', signupPassword);
+      toast({ title: "Signup Successful", description: "You can now log in with your new account." });
+      router.push("/onboarding");
+    } catch (error) {
+       toast({ variant: "destructive", title: "Error", description: "Could not save signup details." });
+    }
   };
   
   const GoogleIcon = () => (
@@ -43,14 +76,14 @@ export default function LoginPage() {
               <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleAuthAction} className="space-y-4">
+              <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email-login">Email</Label>
-                  <Input id="email-login" type="email" placeholder="user@example.com" required />
+                  <Input id="email-login" type="email" placeholder="user@example.com" required value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="password-login">Password</Label>
-                  <Input id="password-login" type="password" required />
+                  <Input id="password-login" type="password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                 </div>
                 <Button type="submit" className="w-full bg-primary hover:bg-primary/90">Login</Button>
                 <div className="relative my-4">
@@ -73,14 +106,14 @@ export default function LoginPage() {
               <CardDescription>Join scheme sathi to find schemes tailored for you.</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleAuthAction} className="space-y-4">
+              <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="email-signup">Email</Label>
-                  <Input id="email-signup" type="email" placeholder="user@example.com" required />
+                  <Input id="email-signup" type="email" placeholder="user@example.com" required value={signupEmail} onChange={(e) => setSignupEmail(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="password-signup">Password</Label>
-                  <Input id="password-signup" type="password" required />
+                  <Input id="password-signup" type="password" required value={signupPassword} onChange={(e) => setSignupPassword(e.target.value)} />
                 </div>
                 <Button type="submit" className="w-full bg-primary hover:bg-primary/90">Sign Up</Button>
                  <div className="relative my-4">
