@@ -8,6 +8,8 @@ export interface Scheme {
   eligibility_criteria: Record<string, any>;
   required_documents: string[];
   application_deadline: string | null;
+  how_to_apply: string;
+  official_website: string;
 }
 
 export interface UserProfile {

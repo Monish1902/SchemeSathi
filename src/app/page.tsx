@@ -28,12 +28,14 @@ const SchemeCard = ({ scheme }: { scheme: Scheme }) => (
       <CardTitle className="text-lg">{scheme.scheme_name}</CardTitle>
       <CardDescription className="text-sm">{scheme.scheme_description.substring(0, 100)}...</CardDescription>
     </CardHeader>
-    <CardContent className="flex-grow">
-      <div className="text-sm text-muted-foreground mb-4">
-        <p><strong>Benefit:</strong> ₹{scheme.total_benefit_amount.toLocaleString()}</p>
+    <CardContent className="flex-grow flex flex-col justify-between">
+       <div>
+        <div className="text-sm text-muted-foreground mb-4">
+          <p><strong>Benefit:</strong> ₹{scheme.total_benefit_amount.toLocaleString()}</p>
+        </div>
       </div>
-      <Button asChild variant="outline">
-        <Link href="#">View Details</Link>
+      <Button asChild variant="outline" className="mt-auto">
+        <Link href={`/dashboard/scheme/${scheme.scheme_id}`}>View Details</Link>
       </Button>
     </CardContent>
   </Card>

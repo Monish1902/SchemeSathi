@@ -10,7 +10,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 15000,
     "eligibility_criteria": { "age": "18-60", "gender": "Female" },
     "required_documents": ["Aadhar Card", "Bank Account Details", "Income Certificate"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Applications can be submitted online through the official department website or at the nearest Mee Seva center. Ensure all required documents are scanned and ready for upload.",
+    "official_website": "https://example.gov.in/aadabidda-nidhi"
   },
   {
     "scheme_id": "scheme_002",
@@ -21,7 +23,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 10000,
     "eligibility_criteria": { "occupation": "Farmer", "land_ownership": "Yes" },
     "required_documents": ["Aadhar Card", "Land Ownership Documents", "Bank Account Details"],
-    "application_deadline": "2024-12-31"
+    "application_deadline": "2024-12-31",
+    "how_to_apply": "Register through the Annadata Sukhibhava portal. You will need to provide your land details and bank information for direct benefit transfer.",
+    "official_website": "https://example.gov.in/annadata-sukhibhava"
   },
   {
     "scheme_id": "scheme_003",
@@ -32,7 +36,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 3000,
     "eligibility_criteria": { "age": "22-35", "employment_status": "Unemployed", "education": "Graduate" },
     "required_documents": ["Aadhar Card", "Educational Certificates", "Employment Exchange Card"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Enroll at your district's Employment Exchange office. You must renew your registration periodically to continue receiving the allowance.",
+    "official_website": "https://example.gov.in/nirudyoga-bruthi"
   },
   {
     "scheme_id": "scheme_004",
@@ -43,7 +49,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 13500,
     "eligibility_criteria": { "occupation": "Farmer" },
     "required_documents": ["Aadhar Card", "Land Documents", "Bank Passbook"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Visit your village secretariat with the required documents. The village volunteer will assist you with the application process.",
+    "official_website": "https://example.gov.in/ysr-rythu-bharosa"
   },
   {
     "scheme_id": "scheme_005",
@@ -54,7 +62,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 15000,
     "eligibility_criteria": { "has_children_in_school": "Yes", "income_below": "poverty line" },
     "required_documents": ["Aadhar Card of Mother and Child", "School ID Card", "Ration Card"],
-    "application_deadline": "2024-11-30"
+    "application_deadline": "2024-11-30",
+    "how_to_apply": "The school headmaster will collect the necessary documents and enroll the student in the scheme. The amount is credited directly to the mother's bank account.",
+    "official_website": "https://example.gov.in/amma-vodi"
   },
   {
     "scheme_id": "scheme_006",
@@ -65,7 +75,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 2750,
     "eligibility_criteria": { "age": ">60", "category": ["Old Age", "Widow", "Disabled"] },
     "required_documents": ["Aadhar Card", "Bank Account Details", "Proof of Age/Disability"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Applications are processed at the village/ward secretariats. A field verification will be conducted before sanctioning the pension.",
+    "official_website": "https://example.gov.in/ysr-pension-kanuka"
   },
   {
     "scheme_id": "scheme_007",
@@ -76,7 +88,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 20000,
     "eligibility_criteria": { "pursuing_higher_education": "Yes", "family_income": "< 2.5 Lakhs" },
     "required_documents": ["Aadhar Card", "College Admission Letter", "Income Certificate"],
-    "application_deadline": "2024-10-31"
+    "application_deadline": "2024-10-31",
+    "how_to_apply": "Students can apply through the Jnanabhumi portal. The college administration must verify the application.",
+    "official_website": "https://example.gov.in/jagananna-vidya-deevena"
   },
   {
     "scheme_id": "scheme_008",
@@ -87,7 +101,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 500000,
     "eligibility_criteria": { "income_below": "poverty line" },
     "required_documents": ["Aarogyasri Card", "Aadhar Card", "Ration Card"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Present your Aarogyasri card at any network hospital. The Aarogya Mitra at the hospital will guide you through the cashless treatment process.",
+    "official_website": "https://example.gov.in/arogyasri"
   },
   {
     "scheme_id": "scheme_009",
@@ -98,7 +114,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 24000,
     "eligibility_criteria": { "occupation": "Weaver" },
     "required_documents": ["Aadhar Card", "Weaver ID Card", "Bank Account"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Submit your application at the Handlooms & Textiles department office in your district. You must be a registered weaver to be eligible.",
+    "official_website": "https://example.gov.in/nethanna-nestham"
   },
     {
     "scheme_id": "scheme_010",
@@ -109,7 +127,9 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 10000,
     "eligibility_criteria": { "occupation": "Driver" },
     "required_documents": ["Aadhar Card", "Driving License", "Vehicle Registration"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Apply online through the Transport Department portal. Vehicle and license details will be verified electronically.",
+    "official_website": "https://example.gov.in/vahana-mitra"
   },
   {
     "scheme_id": "scheme_011",
@@ -120,6 +140,8 @@ export const schemes: Scheme[] = [
     "total_benefit_amount": 18750,
     "eligibility_criteria": { "age": "45-60", "category": ["SC", "ST", "BC", "Minority"] },
     "required_documents": ["Aadhar Card", "Caste Certificate", "Bank Account"],
-    "application_deadline": null
+    "application_deadline": null,
+    "how_to_apply": "Applications are accepted at the village/ward secretariats. The amount will be credited to the beneficiary's bank account in installments.",
+    "official_website": "https://example.gov.in/ysr-cheyutha"
   }
 ];
