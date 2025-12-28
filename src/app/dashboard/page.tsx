@@ -27,7 +27,7 @@ export default function DashboardPage() {
           if (result.error) {
             setError(result.error);
           } else if (result.data) {
-            setRecommendations(result.data);
+            setRecommendations(result.data.slice(0,5));
           }
         })
         .catch(err => {
@@ -105,7 +105,7 @@ export default function DashboardPage() {
 
       {loading && (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, i) => <SchemeCardSkeleton key={i} />)}
+          {[...Array(5)].map((_, i) => <SchemeCardSkeleton key={i} />)}
         </div>
       )}
 
@@ -155,7 +155,7 @@ const DashboardSkeleton = () => (
         </div>
         <Skeleton className="h-8 w-1/3 pt-4" />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {[...Array(6)].map((_, i) => <SchemeCardSkeleton key={i} />)}
+          {[...Array(5)].map((_, i) => <SchemeCardSkeleton key={i} />)}
         </div>
     </div>
 );
