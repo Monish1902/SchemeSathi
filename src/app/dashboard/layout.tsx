@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, User, LogOut } from 'lucide-react';
+import { LayoutDashboard, User, LogOut, ScrollText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useUserProfile } from '@/hooks/use-user-profile';
@@ -21,6 +21,7 @@ import {
 
 const navLinks = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/schemes", label: "All Schemes", icon: ScrollText },
   { href: "/dashboard/profile", label: "My Profile", icon: User },
 ];
 
