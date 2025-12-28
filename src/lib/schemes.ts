@@ -91,7 +91,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aarogyasri Card", "Aadhar Card", "Ration Card"],
     "application_deadline": null,
     "how_to_apply": "Present your Aarogyasri card at any network hospital. The Aarogya Mitra at the hospital will guide you through the cashless treatment process.",
-    "official_website": "https://example.gov.in/arogyasri"
+    "official_website": "https://drntrvaidyaseva.ap.gov.in/web/guest/aarogya-aasara"
   },
   {
     "scheme_id": "scheme_009",
