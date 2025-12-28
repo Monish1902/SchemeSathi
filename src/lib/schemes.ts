@@ -25,7 +25,7 @@ export const schemes: Scheme[] = [
     "required_documents": ["Aadhar Card", "Land Ownership Documents", "Bank Account Details"],
     "application_deadline": "2024-12-31",
     "how_to_apply": "Register through the Annadata Sukhibhava portal. You will need to provide your land details and bank information for direct benefit transfer.",
-    "official_website": "https://example.gov.in/annadata-sukhibhava"
+    "official_website": "https://annadathasukhibhava.ap.gov.in/"
   },
   {
     "scheme_id": "scheme_003",
